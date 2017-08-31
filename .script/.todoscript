@@ -1,0 +1,31 @@
+#!/bin/bash
+
+FILE="/home/desi/.script/todo"
+
+case $1 in
+	--add | -a)
+		echo "-$@" >> .todo.tmp
+		sed -i s/--add//g .todo.tmp
+		sed -i s/-a//g .todo.tmp
+		cat .todo.tmp >> $FILE
+		rm .todo.tmp
+	;;
+	--clear)
+		rm $FILE
+		touch $FILE
+ 	;;
+	--delete | -d )
+		sed '/'"$2"'/d' $FILE > ~/.todo.tmp
+		cp .todo.tmp $FILE
+		rm .todo.tmp
+	;;
+	--show | -s)
+		cat $FILE
+	;;
+	--help | -h)
+		echo -e "usage: todo [ -a |--add ] [ --clear ] [-d |--delete]  [ -s | --show] [-h |--help]"
+	;;
+	*)
+		echo -e "Wrong!Type --help for help."
+esac
+exit 0
