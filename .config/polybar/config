@@ -20,11 +20,17 @@ font-4 = MaterialIcons:size=10;-1
 font-5 = Termsynu:size=8:antialias=false;0
 
 modules-left = i3 
-modules-right = temperature cpu memory backlight wireless-network wired-network fs-root volume battery date powermenu
+modules-right = temperature cpu memory backlight wireless-network wired-network fs-root volume battery timeBattery  date powermenu
 
 wm-restack = i3
 
 tray-position = right
+
+[module/timeBattery]
+type = custom/script
+exec = acpi | cut -f5 -d " " 
+interval = 120
+format-prefix = "REMAINING: "
 
 [module/temperature]
 type = internal/temperature

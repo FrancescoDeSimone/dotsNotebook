@@ -16,7 +16,7 @@
 # ==================================================================================================
 # ==run terminal
 # ==================================================================================================
-	bindsym $mod+Return exec xterm
+	bindsym $mod+Return exec st
 
 # ==================================================================================================
 # ==kill focused window
@@ -187,8 +187,8 @@
 #Popcorntime
 	bindsym $mod+F4 exec ~/.popcorntime/Popcorn-Time
 #Browser 
-	bindsym $mod+b exec chromium --incognito
-	#bindsym $mod+b exec firefox-developer 
+	#bindsym $mod+b exec chromium --incognito
+	bindsym $mod+b exec firefox-developer 
 #Calendar
 	bindsym $mod+c exec xterm -e calcurse 
 #File manager

@@ -98,4 +98,5 @@ alias chromium="chromium --incognito"
 alias todo="~/.script/.todoscript"
 alias df="df -hT"
 alias popcorntime="/home/desi/.popcorntime/Popcorn-Time"
-
+alias grimFandango="LD_PRELOAD=/usr/lib32/libstdc++.so.6 \"GOG Games\"/Grim Fandango Remastered/./start.sh"
+alias aringa="curl -F \"aringa=<-\" arin.ga"

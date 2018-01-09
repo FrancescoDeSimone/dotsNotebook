@@ -1,4 +1,4 @@
-XTerm*faceName: System San Francisco
+XTerm*faceName: luxim
 xterm*faceSize: 9
 xterm*vt100*geometry: 80x60
 xterm*saveLines: 16384
@@ -6,6 +6,15 @@ xterm*charClass:
 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
 xterm*termName: xterm-color
 xterm*eightBitInput: false
+
+
+!font resize
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
 
 !BLK Cursor
 #define _color0        #000d18
@@ -83,6 +92,7 @@ XTerm*colorUL        : _colorUL
 XTerm*foreground     : _foreground
 XTerm*background     : _background
 XTerm*cursorColor    : _cursorColor
+URxvt*scrollBar	     : false
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme
 ! ------------------------------------------------------------------------------
