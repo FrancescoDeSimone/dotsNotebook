@@ -9,6 +9,8 @@
 
 #polybar folder
 !/.config/polybar
+#gtk
+!/.config/gtk*
 
 #ranger folder
 !/.config/ranger
@@ -33,3 +35,7 @@
 !Immagini
 /Immagini/*
 !Immagini/wallpaper
+
+#config file
+!.configuration/
+!.configuration/*
