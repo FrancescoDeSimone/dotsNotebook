@@ -1,15 +1,16 @@
 # /dev/sda3
-UUID=909d4702-fdb5-40a3-8ca8-b0fe72af48cb	/	ext4	rw,noatime,discard,data=ordered,barrier=0,commit=100	0 1
+UUID=c14c6b0b-261e-49eb-abec-ebd2d6afd771	/         	ext4      	rw,noatime,discard,data=ordered,barrier=0,commit=100	0 1
 
 # /dev/sda1
-UUID=2A17-5C90	/boot	vfat	rw,noatime,discard,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed	0 2
+UUID=074E-FB9A      	/boot     	vfat      	rw,noatime,discard,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
 
 # /dev/sda2
-UUID=b58c70bd-2cca-4921-9edf-f8752a6d8a6f	none      	swap      	defaults,discard  	0 0
+UUID=591d9e20-6002-4450-b84d-3a7811d5f98a	none      	swap      	defaults,discard,pri=-2	0 0
 
 none	/tmp	tmpfs	nodev,nosuid,noatime,size=8000M,mode=1777	0	0
 
-none	/home/desi/Immagini/screen	tmpfs	rw,user,nodev,nosuid,noatime,mode=1777	0	0
+none	/home/desi/Downloads	tmpfs	nodev,nosuid,noatime,size=8000M,mode=1777	0	0
 
-shm                    /dev/shm      tmpfs     nodev,nosuid,size=8G        0      0
+shm	/dev/shm	tmpfs	nodev,nosuid,size=8G	0	0
+
 

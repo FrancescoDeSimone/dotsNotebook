@@ -1,0 +1,22 @@
+#auto-reload         yes
+browser             firefox %u
+confirm-exit        no
+notify-program      notify-send
+notify-always       yes
+reload-threads      4
+save-path           ~/.newsboat/saved_articles
+show-read-articles  no
+show-read-feeds     no
+highlight all "Youtube:" red black bold
+highlight all "Reddit:" color190 black bold
+highlight all "News:" green black bold
+always-display-description true 
+bind-key O open-all-unread-in-browser-and-mark-read
+mark-as-read-on-hover yes
+
+macro v set browser "mpv --title='floating' --ytdl-format='bestvideo[ext=mp4][width<=640][height<=360]+bestaudio[ext=m4a]' --ontop --no-border --force-window --geometry=390x220-20-30 %u > /dev/null &"; open-in-browser ; set browser "$BROWSER %u"
+#macro i set browser "w3m"; open-in-browser ; set browser fff 
+
+
+feedlist-format "%4i %t %> %u"
+notify-format "NewsBoat\n%d new articles \n %n to read"

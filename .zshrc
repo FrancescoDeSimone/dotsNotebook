@@ -2,18 +2,25 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/desi/.oh-my-zsh
+  export ZSH="/home/desi/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="gentoo"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
@@ -41,13 +48,17 @@ ZSH_THEME="gentoo"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
@@ -64,7 +75,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -83,20 +94,22 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-# ~/.bashrc
-#
+#fff
+export FFF_TRASH=~/Downloads/fff/trash
 
-alias ls='ls --color=auto'
-alias netctl='sudo netctl'
-alias reboot="sudo systemctl reboot"
-alias poweroff="sudo systemctl poweroff"
-alias halt="sudo systemctl halt"
-alias i3lock="~/.config/i3/lock.sh -s -g -b -p -d /tmp"
+
 alias dd="dd status=progress"
-alias chromium="chromium --incognito" 
-alias todo="~/.script/.todoscript"
-alias df="df -hT"
-alias popcorntime="/home/desi/.popcorntime/Popcorn-Time"
-alias grimFandango="LD_PRELOAD=/usr/lib32/libstdc++.so.6 \"GOG Games\"/Grim Fandango Remastered/./start.sh"
-alias aringa="curl -F \"aringa=<-\" arin.ga"
+alias vi="vim"
+alias tb="nc termbin.com 9999"
+alias aringa="| curl -LF \"aringa=<-\" --post301 arin.ga"
+alias ganache="./.ganache/ganache-*"
+alias getclip="xclip -selection c -o"
+alias setclip="xclip -selection c"
+alias cal="cal -3" 
+alias make="make -j4" 
+
+transfer() {
+        curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
+}
+
+alias transfer=transfer

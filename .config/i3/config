@@ -1,103 +1,121 @@
-# ==================================================================================================
-# ==Mod key
-# ==================================================================================================
+# =======================================================================================
+# ==Variable
+# =======================================================================================
 	set $mod Mod4
+    set $term st 
 
-# ==================================================================================================
-# ==System font 
-# ==================================================================================================
-	font pango:luxim 8
+# =======================================================================================
+# ==System font
+# =======================================================================================
+	font pango:luxim 7
 
-# ==================================================================================================
+# =======================================================================================
 # ==reset floating position
-# ==================================================================================================
+# =======================================================================================
 	floating_modifier $mod
 
-# ==================================================================================================
-# ==run terminal
-# ==================================================================================================
-	bindsym $mod+Return exec xterm
+# =======================================================================================
+# run terminal
+# =======================================================================================
+	bindsym $mod+Return exec $term
 
-# ==================================================================================================
+# =======================================================================================
 # ==kill focused window
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Shift+q kill
-	
-# ==================================================================================================
-# ==Start dmenu
-# ==================================================================================================
-	bindsym $mod+d exec --no-startup-id rofi -show drun -threads 0 -scroll-method 0 -sidebar-mode -hide-scrollbar true  
 
-# ==================================================================================================
+# =======================================================================================
+# ==kill focused window
+# =======================================================================================
+    bindsym $mod+Escape exec i3-easyfocus -w | xargs xkill -id
+
+# =======================================================================================
+# ==Start rofi
+# =======================================================================================
+	bindsym --release $mod+d exec rofi -show drun -threads 0 -scroll-method 0 -sidebar-mode -hide-scrollbar true
+
+# =======================================================================================
+# ==easy focus
+# =======================================================================================
+    bindsym $mod+space exec i3-easyfocus
+
+# =======================================================================================
 # ==change focus
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Left focus left
 	bindsym $mod+Down focus down
 	bindsym $mod+Up focus up
 	bindsym $mod+Right focus right
 
-# ==================================================================================================
+# =======================================================================================
 # ==move focused window
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Shift+Left move left
 	bindsym $mod+Shift+Down move down
 	bindsym $mod+Shift+Up move up
 	bindsym $mod+Shift+Right move right
 
-# ==================================================================================================
+# =======================================================================================
 # ==split in horizontal orientation
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+h split h
 
-# ==================================================================================================
+# =======================================================================================
 # ==split in vertical orientation
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+v split v
 
-# ==================================================================================================
+# =======================================================================================
 # ==enter fullscreen mode for the focused container
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+f fullscreen toggle
 
-# ==================================================================================================
+# =======================================================================================
 # ==change container layout (stacked, tabbed, toggle split)
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+s layout stacking
 	bindsym $mod+w layout tabbed
 	bindsym $mod+e layout toggle split
 
-# ==================================================================================================
+# =======================================================================================
 # ==toggle tiling / floating
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Shift+space floating toggle
 
-# ==================================================================================================
-# ==change focus between tiling / floating windows
-# ==================================================================================================
-	bindsym $mod+space focus mode_toggle
+# =======================================================================================
+# ==audio control
+# =======================================================================================
+    bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -SIGRTMIN+1 i3blocks && exec ~/.config/i3/script/volume
+    bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -SIGRTMIN+1 i3blocks && exec ~/.config/i3/script/volume
+    bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -SIGRTMIN+1 i3block && exec ~/.config/i3/script/volume
 
-# ==================================================================================================
+# =======================================================================================
+# ==Sreen brightness controls
+# =======================================================================================
+   bindsym XF86MonBrightnessDown exec xbacklight -dec 5% && exec ~/.config/i3/script/backlight
+   bindsym XF86MonBrightnessUp exec xbacklight -inc 5% && exec ~/.config/i3/script/backlight
+
+# =======================================================================================
 # ==focus the parent container
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+a focus parent
 
-# ==================================================================================================
-# ==set variable workspace
-# ==================================================================================================
-	set $workspace1 "1  "
-	set $workspace2 "2  "
-	set $workspace3 "3  "
-	set $workspace4 "4  "
-	set $workspace5 "5  "
-	set $workspace6 "6  "
-	set $workspace7 "7  "
-	set $workspace8 "8  "
-	set $workspace9 "9  "
-	set $workspace10 "10  "
-
-# ==================================================================================================
+# =======================================================================================
+# ==Some variable
+# =======================================================================================
+	set $workspace1 "1"
+	set $workspace2 "2"
+	set $workspace3 "3"
+	set $workspace4 "4"
+	set $workspace5 "5"
+	set $workspace6 "6"
+	set $workspace7 "7"
+	set $workspace8 "8"
+	set $workspace9 "9"
+	set $workspace10 "10"
+# =======================================================================================
 # ==switch to workspace
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+1 workspace $workspace1
 	bindsym $mod+2 workspace $workspace2
 	bindsym $mod+3 workspace $workspace3
@@ -109,9 +127,29 @@
 	bindsym $mod+9 workspace $workspace9
 	bindsym $mod+0 workspace $workspace10
 
-# ==================================================================================================
+# =======================================================================================
+# ==switch between the current and the previously focused one
+# =======================================================================================
+    bindsym $mod+Tab workspace back_and_forth
+    bindsym $mod+Shift+Tab move container to workspace back_and_forth
+
+# =======================================================================================
+# ==Automatically putting workspaces on specific screens
+# =======================================================================================
+	workspace $workspace1 output eDP1 
+	workspace $workspace2 output eDP1
+	workspace $workspace3 output eDP1
+	workspace $workspace4 output eDP1
+	workspace $workspace5 output eDP1
+	workspace $workspace6 output HDMI1
+	workspace $workspace7 output HDMI1
+	workspace $workspace8 output HDMI1
+	workspace $workspace9 output HDMI1
+	workspace $workspace10 output HDMI1
+
+# =======================================================================================
 # ==move focused container to workspace
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Shift+1 move container to workspace $workspace1
 	bindsym $mod+Shift+2 move container to workspace $workspace2
 	bindsym $mod+Shift+3 move container to workspace $workspace3
@@ -123,158 +161,133 @@
 	bindsym $mod+Shift+9 move container to workspace $workspace9
 	bindsym $mod+Shift+0 move container to workspace $workspace10
 
-# ==================================================================================================
+# =======================================================================================
 # ==restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+F5 restart
 
-# ==================================================================================================
+# =======================================================================================
 # ==power menu
-# ==================================================================================================
-	bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the Power shortcut. What do you wanna do? You can lose your file m8, watch out!' -b 'Shutdown i3' 'poweroff' -b 'Reboot i3' 'reboot' -b 'Suspend i3' 'systemctl suspend' -b 'Logout i3' 'i3-msg exit'"
+# =======================================================================================
+	bindsym XF86PowerOff exec /usr/lib/i3blocks/shutdown_menu
 
-# ==================================================================================================
+# =======================================================================================
 # ==shutdown
-# ==================================================================================================
+# =======================================================================================
 	bindsym $mod+Shift+Control+p exec poweroff
 
-# ==================================================================================================
+# =======================================================================================
 # ==reboot
-# ==================================================================================================
-	bindsym $mod+Shift+Control+r exec reboot
+# =======================================================================================
+	bindsym $mod+Shift+Control+r exec reboot 
 
-# ==================================================================================================
-# ==Script cambio profilo di risparmio energetico
-# ==================================================================================================
-	bindsym NoSymbol exec xterm
+# =======================================================================================
+# ==Suspend
+# =======================================================================================
+	bindsym $mod+Shift+Control+s exec systemctl suspend 
 
-# ==================================================================================================
+# =======================================================================================
 # ==resize window (you can also use the mouse for that)
-# ==================================================================================================
-	mode "resize" {
-		# These bindings trigger as soon as you enter the resize mode
+# =======================================================================================
+    bindsym $mod+Control+Left resize shrink width 10 px or 10 ppt
+    bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
+    bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
+    bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
 
-		# Pressing down will grow the window’s height.
-		bindsym Left resize shrink width 10 px or 10 ppt
-		bindsym Down resize grow height 10 px or 10 ppt
-		bindsym Up resize shrink height 10 px or 10 ppt
-		bindsym Right resize grow width 10 px or 10 ppt
-
-		# back to normal: Enter or Escape
-		bindsym Return mode "default"
-		bindsym Escape mode "default"
-	}
-
-	bindsym $mod+r mode "resize"
-
-# ==================================================================================================
-# ==Connessioni
-# ==================================================================================================
-	bindsym $mod+Home exec xterm -e sudo netctl start ethernet-dhcp
-	bindsym $mod+End exec xterm -e sudo netctl start wlp2s0-enomiseDWifi
-	bindsym $mod+Prior exec xterm -e sudo netctl start eduroam
-	bindsym $mod+Next exec xterm -e sudo wifi-menu
-
-# ==================================================================================================
-# ==Scorciatoie
-# ==================================================================================================
-#whatsapp
-	bindsym $mod+F1 exec chromium --app=https://web.whatsapp.com/
-#telegram
-	bindsym $mod+F2 exec chromium --app=https://web.telegram.org/#/im
-#eclipse	
-	bindsym $mod+F3 exec eclipse
-#Popcorntime
-	bindsym $mod+F4 exec ~/.popcorntime/Popcorn-Time
-#Browser 
-	bindsym $mod+b exec chromium --incognito
-	#bindsym $mod+b exec firefox-developer 
-#Calendar
-	bindsym $mod+c exec xterm -e calcurse 
+# =======================================================================================
+# ==Shotcut
+# =======================================================================================
+#Clipboard
+    bindsym $mod+Alt_L exec CM_LAUNCHER=rofi clipmenu 
+#Calculator
+    bindsym $mod+c exec ~/.config/i3/script/calc.sh
+#Btmenu
+    bindsym $mod+Shift+b exec ~/gitRepo/btmenu/btmenu
+#Browser
+	bindsym $mod+b exec firefox #chromium --incognito
 #File manager
-	bindsym $mod+Shift+r exec xterm -e ranger
-#screenshot
-	bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h.png' -e 'mv $f ~/Immagini/screen/'
-	bindsym $mod+Print exec scrot -u '%Y-%m-%d-%T_$wx$h.png' -e 'mv $f ~/Immagini/screen/'
-	bindsym $mod+Shift+Print exec xterm -e scrot -s '%Y-%m-%d-%T_$wx$h.png' -e 'mv $f ~/Immagini/screen/'
-	bindsym $mod+Control+Shift+Print exec scrot -u '%Y-%m-%d-%T_$wx$h.png' -e 'mv $f ~/MEGA/Immagini/'
-#calculator
-	bindsym $mod+Shift+c exec xterm -e qalc
-#editor di testo
-	bindsym $mod+Shift+v exec xterm -e vim
-#htop
-	bindsym Ctrl+Shift+Escape exec xterm -e htop 
-# ==================================================================================================
-# ==Pulse Audio controls
-# ==================================================================================================
-	bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+
-	bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%-
-	bindsym XF86AudioMute exec amixer -q sset Master toggle
-	
-#	bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ 
-#	bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
-#	bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle
+    bindsym $mod+Control+Menu exec ~/.config/i3/script/fuzzyFinder.sh
+	bindsym $mod+Menu exec $term -e fff 
+    bindsym $mod+Shift+Menu exec rofi -show fb -modi fb:~/.config/i3/script/rofi-file-browser.sh
+#Screenshot
+    bindsym Ctrl+Print exec maim ~/Immagini/screen/$(date +%s).png 
+	bindsym $mod+Ctrl+Print exec maim -i $(xdotool getactivewindow) ~/Immagini/screen/$(date +%s).png 
+	bindsym --release $mod+Control+Shift+Print exec maim -s ~/Immagini/screen/$(date +%s).png 
+    bindsym Print exec maim | xclip -selection clipboard -t image/png 
+	bindsym $mod+Print exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png 
+	bindsym --release $mod+Shift+Print exec maim -s | xclip -selection clipboard -t image/png 
+#Task manager
+	bindsym Control+Shift+Escape exec $term -e htop
+#Todo
+    bindsym $mod+t exec ~/.config/i3/script/todo
+#Take a selfie
+    bindsym $mod+Control+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Immagini/webcam/$(date +%s).jpeg
+    bindsym $mod+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 /tmp/selfie.png && xclip -selection clipboard -t image/png /tmp/selfie.png && rm /tmp/selfie.png
+#Tv series
+    bindsym $mod+Shift+t exec rofi -threads 0 -show fb -modi fb:~/.config/i3/script/tvseries.py
 
-# ==================================================================================================
-# ==Sreen brightness controls
-# ==================================================================================================
-	bindsym XF86MonBrightnessDown exec xbacklight -dec 5%
-	bindsym XF86MonBrightnessUp exec xbacklight -inc 5%
-
-# ==================================================================================================
+# =======================================================================================
 # ==lock the screen
-# ==================================================================================================
-	bindsym $mod+Shift+x exec ~/.config/i3/lock.sh -s -b -g -d /tmp
+# =======================================================================================
+	bindsym $mod+Shift+x exec ~/.config/i3/lock.sh 
 
-# ==================================================================================================
+# =======================================================================================
 # ==start in floating
-# ==================================================================================================
+# =======================================================================================
 	for_window [class="Dukto"] floating enable
-	for_window [class="Android Emulator - Nexus_5X_API_26:5554"] floating enable
+    for_window [title="floating"] floating enable
+    for_window [title="floating"] sticky enable
 
-# ==================================================================================================
+# =======================================================================================
 # ==color define
-# ==================================================================================================
-	set $bg-color 	         #000000 
+# =======================================================================================
+	set $bg-color 	         #000000
 	set $inactive-bg-color   #2f343f
 	set $text-color          #FFFFFF
-	set $inactive-text-color #676E7D 
+	set $inactive-text-color #676E7D
 	set $urgent-bg-color     #E53935
+	set $border-color	 #0016DE
 
-# ==================================================================================================
+# =======================================================================================
 # ==window colors
-# ==================================================================================================
+# =======================================================================================
 #	                        border              background         text                 indicator
-	client.focused          $bg-color           $bg-color          $text-color          #00ff00
+	client.focused          $bg-color           $border-color      $text-color          #00ff00
 	client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
 	client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
 	client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
-# ==================================================================================================
-# ==Start i3bar to display a workspace bar 
-# ==================================================================================================
-#	bar {
-#		status_command i3blocks -c $HOME/.config/i3/i3blocks.conf 
-#		colors {
-#			background $bg-color
-#			separator #757575
-#			#                  border             background         text
-#			focused_workspace  $bg-color          $bg-color          $text-color
-#			inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-#			urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-#		}
-#	}
+# =======================================================================================
+# ==window border
+# =======================================================================================
+    default_border pixel 1 
+    hide_edge_borders smart
 
-# ==================================================================================================
+# =======================================================================================
+# ==start i3bar
+# =======================================================================================
+    bar
+    {
+        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        separator_symbol " < "
+        tray_output eDP1 
+        colors {
+                separator #666666
+                background #000000
+                statusline #dddddd
+                focused_workspace #0088CC #0088CC #ffffff
+                active_workspace #333333 #333333 #ffffff
+                inactive_workspace #333333 #333333 #888888
+                urgent_workspace #2f343a #900000 #ffffff
+        }
+    }
+
+# =======================================================================================
 # ==exec application on boot
-# ==================================================================================================
-	exec_always xrdb -merge .Xresources
-	exec_always setxkbmap it
-	exec xset b off
-	exec xset b 0 0 0
-	exec megasync
-	exec dunst
-	exec conky
-	exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-	exec_always --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.*
+# =======================================================================================
+	exec --no-startup-id setxkbmap it
+	exec --no-startup-id xrdb -merge .Xresources
+	exec_always --no-startup-id feh -B white --bg-max --no-xinerama --randomize ~/.config/i3/wallpaper
+    exec --no-startup-id clipmenud 
+    exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 

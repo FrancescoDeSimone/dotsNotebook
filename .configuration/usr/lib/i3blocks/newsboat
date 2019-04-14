@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	3) st -e newsboat;;
+esac	
+
+newsboat -x reload
+echo $(newsboat -x print-unread | awk '{print $1}')
