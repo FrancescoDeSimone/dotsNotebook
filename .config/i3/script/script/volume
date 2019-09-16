@@ -1,0 +1,7 @@
+#!/bin/bash
+
+msgId="981141"
+volume=$(/usr/lib/i3blocks/volume)
+dunstify -a "changeVolume" -u low -r "$msgId" \
+    "Volume" "${volume}"
+

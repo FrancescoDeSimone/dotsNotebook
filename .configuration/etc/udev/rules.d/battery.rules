@@ -1,0 +1,5 @@
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/desi/.Xauthority", ATTR{capacity}=="[0-15]", RUN+="/usr/bin/su desi -c ~/.config/i3/script/warnbat.sh"
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/desi/.Xauthority", ATTR{capacity}=="50", RUN+="/usr/bin/su desi -c ~/.config/i3/script/warnbat.sh"
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", RUN+="/usr/bin/pkill -SIGRTMIN+2 i3blocks"
+SUBSYSTEM=="power_supply", ATTR{status}=="Charging", RUN+="/usr/bin/pkill -SIGRTMIN+2 i3blocks"
+SUBSYSTEM=="power_supply", ATTR{status}=="Discharging", ATTR{capacity}=="[0-5]", RUN+="/usr/bin/systemctl hibernate"

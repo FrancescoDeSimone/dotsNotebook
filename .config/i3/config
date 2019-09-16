@@ -2,7 +2,7 @@
 # ==Variable
 # =======================================================================================
 	set $mod Mod4
-    set $term st 
+    set $term alacritty 
 
 # =======================================================================================
 # ==System font
@@ -125,7 +125,7 @@
 	bindsym $mod+7 workspace $workspace7
 	bindsym $mod+8 workspace $workspace8
 	bindsym $mod+9 workspace $workspace9
-	bindsym $mod+0 workspace $workspace10
+	bindsym $mod+0 workspace $workspace10 
 
 # =======================================================================================
 # ==switch between the current and the previously focused one
@@ -145,6 +145,10 @@
 	workspace $workspace7 output HDMI1
 	workspace $workspace8 output HDMI1
 	workspace $workspace9 output HDMI1
+#	workspace $workspace6 output eDP1
+#	workspace $workspace7 output eDP1
+#	workspace $workspace8 output eDP1
+#	workspace $workspace9 output eDP1
 	workspace $workspace10 output HDMI1
 
 # =======================================================================================
@@ -195,48 +199,61 @@
     bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
 
 # =======================================================================================
-# ==Shotcut
+# ==Shortcut
 # =======================================================================================
 #Clipboard
-    bindsym $mod+Alt_L exec CM_LAUNCHER=rofi clipmenu 
+	bindsym $mod+Alt_L exec CM_LAUNCHER=rofi clipmenu 
 #Calculator
-    bindsym $mod+c exec ~/.config/i3/script/calc.sh
+	bindsym $mod+c exec ~/.config/i3/script/calc.sh
 #Btmenu
-    bindsym $mod+Shift+b exec ~/gitRepo/btmenu/btmenu
+	bindsym $mod+Shift+b exec ~/gitRepo/btmenu/btmenu
 #Browser
 	bindsym $mod+b exec firefox #chromium --incognito
 #File manager
-    bindsym $mod+Control+Menu exec ~/.config/i3/script/fuzzyFinder.sh
+	bindsym $mod+Control+Menu exec ~/.config/i3/script/fuzzyFinder.sh
 	bindsym $mod+Menu exec $term -e fff 
-    bindsym $mod+Shift+Menu exec rofi -show fb -modi fb:~/.config/i3/script/rofi-file-browser.sh
+	bindsym $mod+Shift+Menu exec rofi -show fb -modi fb:~/.config/i3/script/rofi-file-browser.sh
 #Screenshot
-    bindsym Ctrl+Print exec maim ~/Immagini/screen/$(date +%s).png 
+	bindsym Ctrl+Print exec maim ~/Immagini/screen/$(date +%s).png 
 	bindsym $mod+Ctrl+Print exec maim -i $(xdotool getactivewindow) ~/Immagini/screen/$(date +%s).png 
 	bindsym --release $mod+Control+Shift+Print exec maim -s ~/Immagini/screen/$(date +%s).png 
-    bindsym Print exec maim | xclip -selection clipboard -t image/png 
+	bindsym Print exec maim | xclip -selection clipboard -t image/png 
 	bindsym $mod+Print exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png 
 	bindsym --release $mod+Shift+Print exec maim -s | xclip -selection clipboard -t image/png 
 #Task manager
 	bindsym Control+Shift+Escape exec $term -e htop
 #Todo
-    bindsym $mod+t exec ~/.config/i3/script/todo
+#    bindsym $mod+t exec ~/.config/i3/script/todo
 #Take a selfie
-    bindsym $mod+Control+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Immagini/webcam/$(date +%s).jpeg
-    bindsym $mod+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 /tmp/selfie.png && xclip -selection clipboard -t image/png /tmp/selfie.png && rm /tmp/selfie.png
+	bindsym $mod+Control+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 ~/Immagini/webcam/$(date +%s).jpeg
+	bindsym $mod+p exec ffmpeg -f video4linux2 -i /dev/video0 -vframes 5 /tmp/selfie%03d.png && xclip -selection clipboard -t image/png /tmp/selfie005.png && rm /tmp/selfie*
 #Tv series
-    bindsym $mod+Shift+t exec rofi -threads 0 -show fb -modi fb:~/.config/i3/script/tvseries.py
+	bindsym $mod+Shift+t exec rofi -threads 0 -show fb -modi fb:~/.config/i3/script/tvshow.sh
+#Emoji
+	bindsym $mod+ograve exec rofi -threads 0 -show fb -modi fb:~/.config/i3/script/emoji.sh
 
 # =======================================================================================
 # ==lock the screen
 # =======================================================================================
-	bindsym $mod+Shift+x exec ~/.config/i3/lock.sh 
+	bindsym $mod+Shift+x exec ~/.config/i3/script/lock.sh -d /tmp -g -s -p 
 
 # =======================================================================================
 # ==start in floating
 # =======================================================================================
-	for_window [class="Dukto"] floating enable
-    for_window [title="floating"] floating enable
-    for_window [title="floating"] sticky enable
+	for_window [class="Dukto"] floating enable;
+    for_window [title="floating"] floating enable;
+    for_window [title="floating"] sticky enable;
+    for_window [class="TelegramDesktop" title="Telegram"] move scratchpad;
+    for_window [class="TelegramDesktop" title="Telegram"] floating enable; 
+    for_window [class="TelegramDesktop" title="Telegram"] sticky enable;
+    for_window [class="TelegramDesktop" title="Telegram"] resize set 681 574; 
+    for_window [title="Choose files"] resize set 400 100;
+	for_window [title="Choose files"] move position 750 10;
+
+# =======================================================================================
+# ==scratchpad short
+# =======================================================================================
+    bindsym $mod+t [class="TelegramDesktop" title="Telegram"] scratchpad show
 
 # =======================================================================================
 # ==color define
@@ -246,7 +263,7 @@
 	set $text-color          #FFFFFF
 	set $inactive-text-color #676E7D
 	set $urgent-bg-color     #E53935
-	set $border-color	 #0016DE
+	set $border-color		 #0016DE
 
 # =======================================================================================
 # ==window colors
@@ -287,7 +304,10 @@
 # =======================================================================================
 	exec --no-startup-id setxkbmap it
 	exec --no-startup-id xrdb -merge .Xresources
-	exec_always --no-startup-id feh -B white --bg-max --no-xinerama --randomize ~/.config/i3/wallpaper
-    exec --no-startup-id clipmenud 
-    exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+	#exec_always --no-startup-id feh -B white --bg-max --no-xinerama --randomize ~/.config/i3/wallpaper
+	exec_always --no-startup-id hsetroot -add "#c0c0c0" -addd "#000000" 5000 -gradient 0
+	exec --no-startup-id clipmenud 
+	exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
+	exec --no-startup-id telegram-desktop
+	exec --no-startup-id hexchat
 
