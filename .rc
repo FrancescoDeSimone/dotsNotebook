@@ -1,0 +1,29 @@
+export EDITOR='nvim'
+
+# FFF conf
+export FFF_TRASH=~/Downloads/fff/trash
+
+#emacs mode
+bindkey -e
+
+
+# alias
+alias dd="dd status=progress"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias tb="nc termbin.com 9999"
+alias aringa="| curl -LF \"aringa=<-\" --post301 arin.ga"
+alias getclip="xclip -selection c -o"
+alias setclip="xclip -selection c"
+alias cal="cal -3" 
+alias make="make -j4" 
+alias ls="ls --color" 
+alias ll="ls -lh" 
+alias la="ls -lha" 
+alias cp="rsync -ahvz"
+transfer() {
+        curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
+}
+
