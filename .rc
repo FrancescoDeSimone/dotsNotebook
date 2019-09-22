@@ -22,8 +22,33 @@ alias make="make -j4"
 alias ls="ls --color" 
 alias ll="ls -lh" 
 alias la="ls -lha" 
-alias cp="rsync -ahvz"
+alias cp="rsync -ahvz --progress"
+alias ..='cd ..'
 transfer() {
         curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
 }
 
+
+trim_all() {
+    set -f
+    set -- $*
+    printf '%s\n' "$*"
+    set +f
+}
+
+split() {
+    set -f
+
+    old_ifs=$IFS
+
+    IFS=$2
+
+    set -- $1
+
+    printf '%s\n' "$@"
+
+    IFS=$old_ifs
+
+    # Re-enable globbing.
+    set +f
+}
